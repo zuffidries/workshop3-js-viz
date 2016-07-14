@@ -1,10 +1,19 @@
 body {
+  width: 100%;
   /*display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: center;*/
 }
 
-.circles {
+body h1{
+  text-align: center;
+}
 
+svg {
+  width: 100%;
+}
+
+svg.map {
+  height: 500px;
 }
