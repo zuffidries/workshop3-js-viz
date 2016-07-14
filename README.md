@@ -123,35 +123,60 @@ In your editor in sketch.js, notice that there are two functions -- setup and dr
 Setup is called once at the beginning of the program while draw is called constantly in a loop.
 
 In the draw function create a circle:
-
-'''ellipse(50, 50, 80, 80);'''
-
-
+```
+ellipse(50, 50, 80, 80);
+```
 
 This line of code means “draw an ellipse, with the center 50 pixels over from the left and 50 pixels down from the top, with a width and height of 80 pixels.”
 
-Save your sketch and refresh your page view in your browser. If you’ve typed everything correctly, you’ll see this appear in the display window:
+Save your sketch and refresh your page view in your browser. If you’ve typed everything correctly, you’ll see a circle in the display window.
 
 If you didn’t type it correctly, you might not see anything. If this happens, make sure that you’ve copied the example code exactly: the numbers should be contained within parentheses and have commas between each of them, and the line should end with a semicolon.
 
+p5js makes it very simple to create animations that interact with the user. There are two variables: mouseX and mouseY that can be used in the sketch.
+
+Make your circle follow the mouse by changing the first two parameters in the ellipse to mouseX and mouseY
+
 Next, we’ll skip ahead to a sketch that’s a little more exciting. Delete the text from the last example, and try this:
 ```
-function setup() {
-  createCanvas(window.innderWidth, window.innerHeight);
-}
-
-function draw() {
-  if (mouseIsPressed) {
-    fill(0);
-  } else {
-    fill(255);
-  }
-  ellipse(mouseX, mouseY, 80, 80);
-}
+	ellipse(mouseX,mouseY,80,80);
 ```
 
+You'll notice that circles are created to follow the mouse. Even in the first example new circles were constantly being drawn over the old ones, but you couldn't tell because they were being created in the same spot. 
 
-This program starts drawing white circles at the position of the mouse. When a mouse button is pressed, the circle color changes to black. We’ll explain more about the elements of this program in detail later. For now, run the code, move the mouse, and click to experience it.
+You'll also notice that they are only being created on a very small canvas. Let's change that!
+
+In the setup method, set that canvas size
+```
+canvas = createCanvas(window.innerWidth, window.innerHeight);
+```
+This creates a canvas that is the width of the window and the height of the window.
+
+Maybe we want to add some color to these circles. There are two variables to change: stroke and fill. Stroke is the outline of the shape and fill is the inside of a shape. Each shape created will have the properties of the last stroke or fill called.
+
+Lets make the fill blue and the stroke orange!
+
+```
+	stroke(255,127,80);
+	fill(40,70,100);
+```
+Remember, these lines need to be added before the ellipse if you want them to take effect!
+
+p5js also makes it easy to react to mouse click and key press events with the booleans "mouseIsPressed" and "keyIsPressed"
+
+Let's change the color of the circle to green if the mouse is clicked and purple if a key is pressed!
+
+Under the original fill statement, put an if statement to change the colors if a mouse or key is pressed.
+
+```
+if (mouseIsPressed) {
+    fill(153,51,255);
+}
+if (keyIsPressed) {
+    fill(0,204,102);
+}
+```
+You'll notice that the original ellipse will change based on the color because that is constantly being drawn as well. 
 
 Parts of this tutorial were adapted from the book, Getting Started with p5.js, by Lauren McCarthy, Casey Reas, and Ben Fry, O’Reilly / Make 2015. Copyright © 2015 Lauren McCarthy, Casey Reas and Ben Fry. All rights reserved.
 
