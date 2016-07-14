@@ -23,6 +23,16 @@ var circles = svg.selectAll('circle')
 
 Let's go through this chain of methods in more detail...
 
+  > svg.selectAll("circle") — Selects all circles in the DOM. Since none exist, thie returns an empty selection. These represent the circles that will soon exist
+
+  > .data(dataset) — Counts and parses our data values, the attributes of the circle. We will set these attributes next. 
+
+  > .enter() — To create new, data-bound elements, you must use enter(). This method looks at the DOM, and then at the data it is being passed. If there are more data values than corresponding DOM elements, then enter() creates a new placeholder element to hand off to the next part of the chain. In this case there are three placeholder elements created!
+
+  >.append("circle") — Takes the placeholder selection created by enter() and inserts the circle elements into the DOM. Yay! Passes the reference of these three circles to the next chain. 
+
+  >.attr("fill", color) — This sets the attributes of the circle based on the data passed to it. 
+
 The .data method sets the attributes As you may notice, the atttributes of these circles have not been set. Create a variable attributes that is an array of JSON data, each element indicating the values for the color, radius (r), and x position (cx) for each circle. 
 ```
 var attributes = [{color: 'red', r: 40, cx: 100},  //example line 
@@ -34,7 +44,7 @@ filling the slashes with your desired color, size, and position.
 
 To see what your circles look like, run the page locally. Here's a reminder how 
 ```
-cd workshop-js-viz/d3-tutorial
+cd workshop-js-viz/d3-tutorial-prod
 python -m SimpleHTTPServer 9000
 ```
 
@@ -46,9 +56,48 @@ svgCircles.selectAll('circle')
   .exit()
   .attr("fill", changeColor);
 ````
-This selects all the circles 
+Unlike the enter Selection which represents a mapping of the DOM nodes that will be created in order to map an excess of data points, the exit selection represents the opposite. It represents mappings to DOM that do not have the corresponding data points. The DOM nodes of these mappings will either be deleted or its attributes are changed. 
+
+To see it in effect, un comment out this code and set the attribuetsExit variable to the data of the circles that you do not want your selection to include. Then set the changeColor in the .attr("fill", changeColor) after the .exit() to the color you want to change your selection to. 
+```
+var attributesExit = [{color: 'red', r: 40, cx: 100}];
+```
 
 
+
+##Map 
+
+D3.geo is one of D3's toolkits. It provides several tools to work with maps and topography, in this case we are gonna map the US using the usual projection used for this area - mercator. 
+
+We've provided a topoJSON file which was previously explained. This JSON file contains the data for the map and shows how D3 can take multiple formats of data. 
+
+Paste the following code in your index.js. Where it says longitude and latitude, look up what the longitude and latitude of the center of the US is and paste the values where indicated.  Also don't forget to set the scale. 
+
+````
+d3.json("usa.json", function(error, usa) {
+    if (error) return console.error(error);
+
+    // var scale = integer;  // around 800 should be fine
+    // var center = [longitude, latitude];
+    // var zoomOffset = double;  // the amount the zoom center should deviate from the map's center
+
+    zoom.center(center.map(function(el){return el + zoomOffset;}));
+
+    var usaObject = usa.objects.layer1;
+    var topoUsaFeatures = topojson.feature(usa, usaObject);
+
+    var projectionLittle = d3.geo.mercator()
+                                .scale(scale)
+                                .center(center);
+
+    var path = d3.geo.path()
+                      .projection(projectionLittle);
+                      svgMap.append("path")
+                      .datum(topoUsaFeatures)
+                      .attr("d", path);
+    });
+````
+Now you can see your map on the page! 
 
 # P5.js Tutorial
 
@@ -72,43 +121,67 @@ In the "empty-example" folder, you will find a "sketch.js" and an "index.html" f
 Open the index.html file in your browser by double clicking on it in your file manager or type: file:///the/file/path/to/your/html in the address bar to view your sketch.
 
 ##Your First Sketch
-In your editor in sketch.js, type the following:
+In your editor in sketch.js, notice that there are two functions -- setup and draw.
 
+Setup is called once at the beginning of the program while draw is called constantly in a loop.
+
+In the draw function create a circle:
 ```
-function setup() {
-
-}
-
-function draw() {
-  ellipse(50, 50, 80, 80);
-}
+ellipse(50, 50, 80, 80);
 ```
-
 
 This line of code means “draw an ellipse, with the center 50 pixels over from the left and 50 pixels down from the top, with a width and height of 80 pixels.”
 
-Save your sketch and refresh your page view in your browser. If you’ve typed everything correctly, you’ll see this appear in the display window:
+Save your sketch and refresh your page view in your browser. If you’ve typed everything correctly, you’ll see a circle in the display window.
 
 If you didn’t type it correctly, you might not see anything. If this happens, make sure that you’ve copied the example code exactly: the numbers should be contained within parentheses and have commas between each of them, and the line should end with a semicolon.
 
+p5js makes it very simple to create animations that interact with the user. There are two variables: mouseX and mouseY that can be used in the sketch.
+
+Make your circle follow the mouse by changing the first two parameters in the ellipse to mouseX and mouseY
+
 Next, we’ll skip ahead to a sketch that’s a little more exciting. Delete the text from the last example, and try this:
 ```
-function setup() {
-  createCanvas(window.innderWidth, window.innerHeight);
-}
-
-function draw() {
-  if (mouseIsPressed) {
-    fill(0);
-  } else {
-    fill(255);
-  }
-  ellipse(mouseX, mouseY, 80, 80);
-}
+	ellipse(mouseX,mouseY,80,80);
 ```
 
+You'll notice that circles are created to follow the mouse. Even in the first example new circles were constantly being drawn over the old ones, but you couldn't tell because they were being created in the same spot. 
 
-This program starts drawing white circles at the position of the mouse. When a mouse button is pressed, the circle color changes to black. We’ll explain more about the elements of this program in detail later. For now, run the code, move the mouse, and click to experience it.
+You'll also notice that they are only being created on a very small canvas. Let's change that!
+
+In the setup method, set that canvas size
+```
+canvas = createCanvas(window.innerWidth, window.innerHeight);
+```
+This creates a canvas that is the width of the window and the height of the window.
+
+Maybe we want to add some color to these circles. There are two variables to change: stroke and fill. Stroke is the outline of the shape and fill is the inside of a shape. Each shape created will have the properties of the last stroke or fill called.
+
+Lets make the fill blue and the stroke orange!
+
+```
+	stroke(255,127,80);
+	fill(40,70,100);
+```
+Remember, these lines need to be added before the ellipse if you want them to take effect!
+
+p5js also makes it easy to react to mouse click and key press events with the booleans "mouseIsPressed" and "keyIsPressed"
+
+Let's change the color of the circle to green if the mouse is clicked and purple if a key is pressed!
+
+Under the original fill statement, put an if statement to change the colors if a mouse or key is pressed.
+
+```
+if (mouseIsPressed) {
+    fill(153,51,255);
+}
+if (keyIsPressed) {
+    fill(0,204,102);
+}
+```
+You'll notice that the original ellipse will change based on the color because that is constantly being drawn as well. 
+
+P5js makes it simple to create animations, respond to user interaction, insert music and insert images. For more examples go to the p5js website: https://p5js.org/examples/  
 
 Parts of this tutorial were adapted from the book, Getting Started with p5.js, by Lauren McCarthy, Casey Reas, and Ben Fry, O’Reilly / Make 2015. Copyright © 2015 Lauren McCarthy, Casey Reas and Ben Fry. All rights reserved.
 
