@@ -233,7 +233,7 @@ Replace all the current code you have with this:
       **var triangleCenter = new Point(i,j);**
       **createTriangle(triArray, triangleCenter, Radius);**
 
-      **var nextTriangleCenter = new Point(i+Radius,j);**
+    **var nextTriangleCenter = new Point(i+Radius,j);**
       **createTriangle(triArray, nextTriangleCenter, -Radius);**
     **}**
   **}**
@@ -259,12 +259,12 @@ For a more extreme experience, try this onFrame instead:
 
 Another onFrame that changes the size of the triangles:
 
-**function onFrame(event) {**
-   **for(var i = 0; i < triArray.length; i++) {**
-      **var sinus = Math.sin(event.time * 2 + (i*400));**
-      **triArray[i].scaling = sinus;**
-    **}**
-**}**
+`function onFrame(event) {
+   for(var i = 0; i < triArray.length; i++) {
+      var sinus = Math.sin(event.time * 2 + (i*400));
+      triArray[i].scaling = sinus;
+    }
+}`
 
 The triangles shrink and fade with the above code.  Play with the onFrame and make your triangles do tons of cool things!  Check out some ideas here: http://paperjs.org/tutorials/animation/creating-animations/
 
