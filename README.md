@@ -55,13 +55,15 @@ Open the index.html file in your browser by double clicking on it in your file m
 ##Your First Sketch
 In your editor in sketch.js, type the following:
 
-**function setup() {**
+```
+function setup() {
 
-**}**
+}
 
-**function draw() {**
-  **ellipse(50, 50, 80, 80);**
-**}**
+function draw() {
+  ellipse(50, 50, 80, 80);
+}
+```
 
 
 This line of code means “draw an ellipse, with the center 50 pixels over from the left and 50 pixels down from the top, with a width and height of 80 pixels.”
@@ -71,19 +73,20 @@ Save your sketch and refresh your page view in your browser. If you’ve typed e
 If you didn’t type it correctly, you might not see anything. If this happens, make sure that you’ve copied the example code exactly: the numbers should be contained within parentheses and have commas between each of them, and the line should end with a semicolon.
 
 Next, we’ll skip ahead to a sketch that’s a little more exciting. Delete the text from the last example, and try this:
+```
+function setup() {
+  createCanvas(window.innderWidth, window.innerHeight);
+}
 
-**function setup() {**
-  **createCanvas(window.innderWidth, window.innerHeight);**
-**}**
-
-**function draw() {**
-  **if (mouseIsPressed) {**
-    **fill(0);**
-  **} else {**
-    **fill(255);**
-  **}**
-  **ellipse(mouseX, mouseY, 80, 80);**
-**}**
+function draw() {
+  if (mouseIsPressed) {
+    fill(0);
+  } else {
+    fill(255);
+  }
+  ellipse(mouseX, mouseY, 80, 80);
+}
+```
 
 
 This program starts drawing white circles at the position of the mouse. When a mouse button is pressed, the circle color changes to black. We’ll explain more about the elements of this program in detail later. For now, run the code, move the mouse, and click to experience it.
