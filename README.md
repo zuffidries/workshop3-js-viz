@@ -118,7 +118,7 @@ npm install paper
 If you are still having trouble, there is additional information here: https://www.npmjs.com/package/paper
 
 ##Accessing paper.js
-You will see that paper.js is located under the "paper" folder under "node_modules".  There are various other folders after that.  We need the path to paper.js.  This should already be in the index.html, but in case it isn't, search through the folders until you find the correct path to the paper.js.  Then, add this to the line under "load the Paper.js library".
+You will see that paper.js is located under the "paper" folder under "node_modules".  There are various other folders after that.  We need the path to paper.js.  This should already be in the index.html, but in case it isn't, search through the folders until you find the correct path to the paper.js.  Then, make sure that this is the correct path under the comment "load the Paper.js library".  If not, change the path to the correct one.
 
 ##Starting out
 Starting out, we have an index.html file, which is really all we need to get a quick introduction to the paper.js library.  For more complex projects, it is better to have a separate .js file to store the PaperScript you use.  But for our purposes, the index works just fine.  Our index.html loads the paper.js library in the first script tag.  Notice that in the second script tag, the type is "text/paperscript".  PaperScript is the language for paper.js; it is very similar to JavaScript.  It is inside this script tag (the second one) that we will be experimenting with the powers of paper.js.
