@@ -167,38 +167,38 @@ This definitely works for one triangle, but what if we want many triangles?  Spe
 ##More triangles
 Triangles are cool, but we should definitely have more than 1.  Delete the paperscript code starting at **var path = new Path(points);** until the end of the paperscript code.  Then, add in the following after the "points" section:
 
-**var path = new Path(points);
-var triangleColor = Color.random();
-path.fillColor = triangleColor;
-}**
+**var path = new Path(points);**
+**var triangleColor = Color.random();**
+**path.fillColor = triangleColor;**
+**}**
 
 But we're not actually creating any triangles in this code.  Yet.  Add the following after the code you just added:
 
-**var triDistance = 50;
+**var triDistance = 50;**
 
-for(var i = 0; i < view.size.width; i+= triDistance) {
-    var Radius = triDistance/2;
-    var triangleCenter = new Point(i,view.center.y);
-    createTriangle(triangleCenter, Radius);
-}**
+**for(var i = 0; i < view.size.width; i+= triDistance) {**
+    **var Radius = triDistance/2;**
+    **var triangleCenter = new Point(i,view.center.y);**
+    **createTriangle(triangleCenter, Radius);**
+**}**
 
 You should now see a row of multicolored triangles across your screen.  But we want ALL THE TRIANGLES.  So let's add in another for loop so that we get the triangles up and down the page as well.  Replace the code you just added with this:
 
-**var triDistance = 50;
+**var triDistance = 50;**
 
-for(var i = 0; i < view.size.width; i+= triDistance) {
-  for(var j = 0; j < view.size.height; j+= triDistance) {
+**for(var i = 0; i < view.size.width; i+= triDistance) {**
+  **for(var j = 0; j < view.size.height; j+= triDistance) {**
 
-    var Radius = triDistance/2;
-    var triangleCenter = new Point(i,j);
-    createTriangle(triangleCenter, Radius);
-  }
-}**
+    **var Radius = triDistance/2;**
+    **var triangleCenter = new Point(i,j);**
+    **createTriangle(triangleCenter, Radius);**
+  **}**
+**}**
 
 In the inner for loop of the code you just added, add the following two lines of code to the bottom , after the "createTriangle" function call:
 
-**var nextTriangleCenter = new Point(i+Radius,j);
-createTriangle(nextTriangleCenter, -Radius);**
+**var nextTriangleCenter = new Point(i+Radius,j);**
+**createTriangle(nextTriangleCenter, -Radius);**
 
 Now, your entire screen should be filled with triangles!
 
@@ -206,65 +206,65 @@ Now, your entire screen should be filled with triangles!
 Ok, so we have our triangles.  But we want to make them do stuff.  How can we do that?  What we can do is have our triangles change color.  We'll do this by making an array of possible colors, and randomly assigning a color to a triangle.  Then, we'll update it with each frame.
 Replace all the current code you have with this:
 
-**var colours = ['#363938', '#386567', '#5C4134', '#C4A778', '#CE9B59'];
+**var colours = ['#363938', '#386567', '#5C4134', '#C4A778', '#CE9B59'];**
 
-function createTriangle(_triangleArray, _triangleCenter, _radius){
-  var c = _triangleCenter;
-  var Radius = _radius;
+**function createTriangle(_triangleArray, _triangleCenter, _radius){**
+  **var c = _triangleCenter;**
+  **var Radius = _radius;**
 
-  var points = [
-    new Point(c.x + Radius, c.y+Radius),
-    new Point(c.x - Radius, c.y+Radius),
-    new Point(c.x, c.y-Radius)
-    ];
+  **var points = [**
+    **new Point(c.x + Radius, c.y+Radius),**
+    **new Point(c.x - Radius, c.y+Radius),**
+    **new Point(c.x, c.y-Radius)**
+    **];
 
-  var path = new Path(points);
-  var triangleColor = colours[Math.floor(Math.random()*colours.length)];
-  path.fillColor = triangleColor;
+  **var path = new Path(points);**
+  **var triangleColor = colours[Math.floor(Math.random()*colours.length)];**
+  **path.fillColor = triangleColor;**
 
-  _triangleArray.push(path);
-}
-var triArray = [];
-var triDistance = 50;
+  **_triangleArray.push(path);**
+**}**
+**var triArray = [];**
+**var triDistance = 50;**
 
-for(var i = 0; i < view.size.width; i+= triDistance) {
-    for(var j = 0; j < view.size.height; j+= triDistance) {
-      var Radius = triDistance/2;
-      var triangleCenter = new Point(i,j);
-      createTriangle(triArray, triangleCenter, Radius);
+**for(var i = 0; i < view.size.width; i+= triDistance) {**
+    **for(var j = 0; j < view.size.height; j+= triDistance) {**
+      **var Radius = triDistance/2;**
+      **var triangleCenter = new Point(i,j);**
+      **createTriangle(triArray, triangleCenter, Radius);**
 
-      var nextTriangleCenter = new Point(i+Radius,j);
-      createTriangle(triArray, nextTriangleCenter, -Radius);
-    }
-  }**
+      **var nextTriangleCenter = new Point(i+Radius,j);**
+      **createTriangle(triArray, nextTriangleCenter, -Radius);**
+    **}**
+  **}**
 
   Remember that paper.js comes equipped with a way to animate things very easily--onFrame.  Add in the following code below everything you've just added:
 
-  **function onFrame(event) {
-   for(var i = 0; i < triArray.length; i++) {
-        triArray[i].fillColor.hue +=5;
-   }
-}**
+  **function onFrame(event) {**
+   **for(var i = 0; i < triArray.length; i++) {**
+        **triArray[i].fillColor.hue +=5;**
+   **}**
+**}**
 
 You should get triangles that change colors.
 
 For a more extreme experience, try this onFrame instead:
 
-**function onFrame(event) {
-   for(var i = 0; i < triArray.length; i++) {
-        var triangleColor = Color.random();
-        triArray[i].fillColor = triangleColor;
-    }
-}**
+**function onFrame(event) {**
+   **for(var i = 0; i < triArray.length; i++) {**
+        **var triangleColor = Color.random();**
+        **triArray[i].fillColor = triangleColor;**
+    **}**
+**}**
 
 Another onFrame that changes the size of the triangles:
 
-**function onFrame(event) {
-   for(var i = 0; i < triArray.length; i++) {
-      var sinus = Math.sin(event.time * 2 + (i*400));
-      triArray[i].scaling = sinus;
-    }
-}**
+**function onFrame(event) {**
+   **for(var i = 0; i < triArray.length; i++) {**
+      **var sinus = Math.sin(event.time * 2 + (i*400));**
+      **triArray[i].scaling = sinus;**
+    **}**
+**}**
 
 The triangles shrink and fade with the above code.  Play with the onFrame and make your triangles do tons of cool things!  Check out some ideas here: http://paperjs.org/tutorials/animation/creating-animations/
 
