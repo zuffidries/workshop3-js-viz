@@ -4,7 +4,7 @@
 Fork this repo...
 To see what we're starting with run the index.html page on your local server. Reminder on running pages locally:
 ```
-cd workshop-js-viz
+cd workshop-js-viz/d3-tutorial
 python -m SimpleHTTPServer 9000
 ```
 As you can see the page is very simple. It just shows three circles hardcoded into html and css. Let's see what d3 can do.
