@@ -100,17 +100,18 @@ This tutorial will give you the basics of what you need to start familiarizing y
 
 ##Installing paper.js
 We have been using Node.js and Atom so far, so we will continue to use these.  We will use NPM to install Paper, but first, we need to install Cairo graphics.  In the folder in which you will be working, issue the following command:
-
+```
 brew install cairo pango
+```
 
 Note that on OSX, there is an issue with Cairo.  The following line should fix it:
-
+```
 PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig/ npm install paper
-
+```
 Next, install the paper library:
-
+```
 npm install paper
-
+```
 ##Accessing paper.js
 You will see that paper.js is located under the "paper" folder under "node_modules".  There are various other folders after that.  We need the path to paper.js.  This should already be in the index.html, but in case it isn't, search through the folders until you find the correct path to the paper.js.  Then, add this to the line under "load the Paper.js library".
 
