@@ -178,6 +178,8 @@ if (keyIsPressed) {
 ```
 You'll notice that the original ellipse will change based on the color because that is constantly being drawn as well. 
 
+P5js makes it simple to create animations, respond to user interaction, insert music and insert images. For more examples go to the p5js website: https://p5js.org/examples/  
+
 Parts of this tutorial were adapted from the book, Getting Started with p5.js, by Lauren McCarthy, Casey Reas, and Ben Fry, O’Reilly / Make 2015. Copyright © 2015 Lauren McCarthy, Casey Reas and Ben Fry. All rights reserved.
 
 # paper.js Tutorial
