@@ -114,6 +114,9 @@ Next, install the paper library:
 ```
 npm install paper
 ```
+
+If you are still having trouble, there is additional information here: https://www.npmjs.com/package/paper
+
 ##Accessing paper.js
 You will see that paper.js is located under the "paper" folder under "node_modules".  There are various other folders after that.  We need the path to paper.js.  This should already be in the index.html, but in case it isn't, search through the folders until you find the correct path to the paper.js.  Then, add this to the line under "load the Paper.js library".
 
