@@ -259,7 +259,8 @@ For a more extreme experience, try this onFrame instead:
 
 Another onFrame that changes the size of the triangles:
 
-```function onFrame(event) {
+```
+function onFrame(event) {
    for(var i = 0; i < triArray.length; i++) {
       var sinus = Math.sin(event.time * 2 + (i*400));
       triArray[i].scaling = sinus;
