@@ -44,7 +44,7 @@ filling the slashes with your desired color, size, and position.
 
 To see what your circles look like, run the page locally. Here's a reminder how 
 ```
-cd workshop-js-viz/d3-tutorial
+cd workshop-js-viz/d3-tutorial-prod
 python -m SimpleHTTPServer 9000
 ```
 
