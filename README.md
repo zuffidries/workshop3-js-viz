@@ -23,6 +23,16 @@ var circles = svg.selectAll('circle')
 
 Let's go through this chain of methods in more detail...
 
+  > svg.selectAll("circle") — Selects all circles in the DOM. Since none exist, thie returns an empty selection. These represent the circles that will soon exist
+
+  > .data(dataset) — Counts and parses our data values, the attributes of the circle. We will set these attributes next. 
+
+  > .enter() — To create new, data-bound elements, you must use enter(). This method looks at the DOM, and then at the data it is being passed. If there are more data values than corresponding DOM elements, then enter() creates a new placeholder element to hand off to the next part of the chain. In this case there are three placeholder elements created!
+
+  >.append("circle") — Takes the placeholder selection created by enter() and inserts the circle elements into the DOM. Yay! Passes the reference of these three circles to the next chain. 
+
+  >.attr("fill", color) — This sets the attributes of the circle based on the data passed to it. 
+
 The .data method sets the attributes As you may notice, the atttributes of these circles have not been set. Create a variable attributes that is an array of JSON data, each element indicating the values for the color, radius (r), and x position (cx) for each circle. 
 ```
 var attributes = [{color: 'red', r: 40, cx: 100},  //example line 
@@ -46,9 +56,45 @@ svgCircles.selectAll('circle')
   .exit()
   .attr("fill", changeColor);
 ````
-This selects all the circles 
+Unlike the enter Selection which represents a mapping of the DOM nodes that will be created in order to map an excess of data points, the exit selection represents the opposite. It represents mappings to DOM that do not have the corresponding data points. The DOM nodes of these mappings will either be deleted or its attributes are changed. 
+
+To see it in effect, un comment out this code and set the attribuetsExit variable to the data of the circles that you do not want your selection to include. Then set the changeColor in the .attr("fill", changeColor) after the .exit() to the color you want to change your selection to. 
+```
+var attributesExit = [{color: 'red', r: 40, cx: 100}];
+```
 
 
+
+##Map 
+
+D3.geo is one of D3's toolkits. It provides several tools to work with maps and topography, in this case we are gonna map the US using the usual projection used for this area - mercator. 
+
+We've provided a topoJSON file which was previously explained. This JSON file contains the data for the map and shows how D3 can take multiple formats of data. 
+
+Paste the following code in your index.js. Where it says longitude and latitude, look up what the longitude and latitude of the center of the US is and paste the values where indicated.  Also don't forget to set the scale. 
+
+````
+d3.json("usa.json", function(error, usa) {
+  if (error) return console.error(error);
+
+  // var scale = integer;  // around 800 should be fine
+  // var center = [longitudeHERE, latitudeHERE];
+
+  var usaObject = usa.objects.layer1;
+  var topoUsaFeatures = topojson.feature(usa, usaObject);
+
+  var projectionLittle = d3.geo.mercator()
+  .scale(scale)
+  .center(center);
+
+  var path = d3.geo.path()
+  .projection(projectionLittle);
+  svgMap.append("path")
+  .datum(topoUsaFeatures)
+  .attr("d", path);
+  });
+````
+Now you can see your map on the page! 
 
 # P5.js Tutorial
 
