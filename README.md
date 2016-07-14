@@ -75,24 +75,27 @@ Paste the following code in your index.js. Where it says longitude and latitude,
 
 ````
 d3.json("usa.json", function(error, usa) {
-  if (error) return console.error(error);
+    if (error) return console.error(error);
 
-  // var scale = integer;  // around 800 should be fine
-  // var center = [longitudeHERE, latitudeHERE];
+    // var scale = integer;  // around 800 should be fine
+    // var center = [longitude, latitude];
+    // var zoomOffset = double;  // the amount the zoom center should deviate from the map's center
 
-  var usaObject = usa.objects.layer1;
-  var topoUsaFeatures = topojson.feature(usa, usaObject);
+    zoom.center(center.map(function(el){return el + zoomOffset;}));
 
-  var projectionLittle = d3.geo.mercator()
-  .scale(scale)
-  .center(center);
+    var usaObject = usa.objects.layer1;
+    var topoUsaFeatures = topojson.feature(usa, usaObject);
 
-  var path = d3.geo.path()
-  .projection(projectionLittle);
-  svgMap.append("path")
-  .datum(topoUsaFeatures)
-  .attr("d", path);
-  });
+    var projectionLittle = d3.geo.mercator()
+                                .scale(scale)
+                                .center(center);
+
+    var path = d3.geo.path()
+                      .projection(projectionLittle);
+                      svgMap.append("path")
+                      .datum(topoUsaFeatures)
+                      .attr("d", path);
+    });
 ````
 Now you can see your map on the page! 
 
