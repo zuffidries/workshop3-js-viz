@@ -2,45 +2,51 @@
 
 ##Introduction
 Fork this repo...
-To see what we're starting with run the index.html page on your local server. Reminder on running pages locally:
-```
-cd workshop-js-viz/d3-tutorial
-python -m SimpleHTTPServer 9000
-```
-As you can see the page is very simple. It just shows three circles hardcoded into html and css. Let's see what d3 can do.
 
 ##Setting up
 In your index.html file link the d3/d3.js file right above the index.js file!
 ```
 <script type="text/javascript" src="d3/d3.min.js"></script>
 ```
-##Selecting Items
-One of d3's ability that we mentioned is its more compact way to select DOM elements. As you can see in your index.js file, we have already selected the circles with the d3.select() method and stored them in the variable circle. 
+##Selecting Items and Entering the selection 
+One of d3's ability that we mentioned is its more compact way to select DOM elements. As you can see in your index.js file, we have already selected the svg circles with the d3.selectAll() method and entered the selection using the chaining method shown below. Notice that your html does not specify any svg elements, we are creating them and selecting them here. 
 ```
-var circle = d3.selectAll("circle");
+var circles = svg.selectAll('circle')
+  .data(attributes)
+  .enter()
+  .append("circle")
+  .attr('fill', color)
+  .attr('r', radius)
+  .attr('cx', cx)
+  .attr('cy', '50px');
 ```
-D3 allows us to manipulate any selected items, which are selected using the W3C Selector API, and manipulate them in a less verbose aproach than standard DOM selection using javascript. 
 
-Change the colors and radii of the circles using...
-```
-  circle.style("fill", ///); 
-  circle.attr("r", ////);
-```
-filling the slashes with your desired color and size . 
+Let's go through this chain of methods in more detail...
 
-##Binding Data
-Now for the real, powerful feature of d3: let's attach some data to our circles!
+The .data method sets the attributes As you may notice, the atttributes of these circles have not been set. Create a variable attributes that is an array of JSON data, each element indicating the values for the color, radius (r), and x position (cx) for each circle. 
 ```
-circle.data([#, #, #]);
+var attributes = [{color: 'red', r: 40, cx: 100},  //example line 
+                  {color: '/////', r: ////, cx:////}, 
+                  {color: '////', r: ////, cx://///}, 
+                  {color: '////', r: ////, cx:///}];
 ```
-Make the data mean something, so they're not just arbitrary numbers
+filling the slashes with your desired color, size, and position. 
 
-For example you can make the data represent the radii of the circles i.e.:
+To see what your circles look like, run the page locally. Here's a reminder how 
 ```
-circle.attr("r", function(d) { return Math.sqrt(d); });
+cd workshop-js-viz/d3-tutorial
+python -m SimpleHTTPServer 9000
 ```
-Play around with the data and make the circles different sizes. Create a row of circles in ascending size and vice versa!
 
+#Exiting the selection 
+Underneath entering the circles, you see a commented out chain of methods which looks like this: 
+````
+svgCircles.selectAll('circle')
+  .data(attributesExit)
+  .exit()
+  .attr("fill", changeColor);
+````
+This selects all the circles 
 
 
 
