@@ -165,7 +165,7 @@ function createTriangle(triangleCenter){
  Now, you should have a triangle in the center of your screen that changes colors every time you reload your page.
 
 ##More triangles
-Triangles are cool, but we should definitely have more than 1.  Delete the paperscript code starting at **var path = new Path(points);** until the end of the paperscript code.  Then, add in the following after the "points" section:
+Triangles are cool, but we should definitely have more than 1.  Delete the paperscript code starting at ```var path = new Path(points);``` until the end of the paperscript code.  Then, add in the following after the "points" section:
 ```
 var path = new Path(points);
 var triangleColor = Color.random();
