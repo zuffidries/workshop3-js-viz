@@ -1,3 +1,36 @@
+# D3 Tutorial 
+
+##Introduction 
+Fork this repo...
+To see what we're starting with run the index.html page on your local server. Reminder on running pages locally: 
+> cd workshop-js-viz
+> python -m SimpleHTTPServer 9000
+
+As you can see the page is very simple. It just shows three circles hardcoded into html and css. Let's see what d3 can do. 
+
+##Setting up 
+In your index.html file link the d3/d3.js file right above the index.js file! 
+<script type="text/javascript" src="d3/d3.js"></script>
+
+##Selecting Items 
+One of d3's ability that we mentioned is its more compact way to selec DOM elements. Select your circles with ...
+
+##Binding Data 
+Now for the real, powerful feature of d3: let's attach some data to our circles! 
+
+circle.data([#, #, #]);
+
+Make the data mean something, so they're not just arbitrary numbers 
+
+For example you can make the data represent the radii of the circles i.e.:
+
+circle.attr("r", function(d) { return Math.sqrt(d); });
+
+PLay around with the data and make the circles different sizes. Create a row of circles in ascending size and vice versa!
+
+
+
+
 # P5.js Tutuorial
 
 ##Get Started
