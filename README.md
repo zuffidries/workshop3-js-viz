@@ -71,7 +71,7 @@ D3.geo is one of D3's toolkits. It provides several tools to work with maps and 
 
 We've provided a topoJSON file which was previously explained. This JSON file contains the data for the map and shows how D3 can take multiple formats of data. 
 
-Paste the following code in your index.js. Where it says longitude and latitude, look up what the longitude and latitude of the center of the US is and paste the values where indicated.  Also don't forget to set the scale. 
+Paste the following code in your index.js. Where it says longitude and latitude, look up what the longitude and latitude of the center of the US is and paste the values where indicated.  Also don't forget to set the scale and offset
 
 ````
 d3.json("usa.json", function(error, usa) {
