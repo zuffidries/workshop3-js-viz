@@ -12,10 +12,21 @@ As you can see the page is very simple. It just shows three circles hardcoded in
 ##Setting up
 In your index.html file link the d3/d3.js file right above the index.js file!
 ```
-<script type="text/javascript" src="d3/d3.js"></script>
+<script type="text/javascript" src="d3/d3.min.js"></script>
 ```
 ##Selecting Items
-One of d3's ability that we mentioned is its more compact way to selec DOM elements. Select your circles with ...
+One of d3's ability that we mentioned is its more compact way to select DOM elements. As you can see in your index.js file, we have already selected the circles with the d3.select() method and stored them in the variable circle. 
+```
+var circle = d3.selectAll("circle");
+```
+D3 allows us to manipulate any selected items, which are selected using the W3C Selector API, and manipulate them in a less verbose aproach than standard DOM selection using javascript. 
+
+Change the colors and radii of the circles using...
+```
+  circle.style("fill", ///); 
+  circle.attr("r", ////);
+```
+filling the slashes with your desired color and size . 
 
 ##Binding Data
 Now for the real, powerful feature of d3: let's attach some data to our circles!
