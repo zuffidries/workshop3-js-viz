@@ -12,11 +12,20 @@ window.onload = function(){
     return "blue";
   }
 
+  function zoomed(){
+    svgMap.select('path')
+          .attr('transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')' );
+  }
+
   // ADD THE attributesEnter HERE!
   // var attributesEnter = ;
 
+  var zoom = d3.behavior.zoom()
+                      .scaleExtent([1, 5])
+                      .on("zoom", zoomed);
+
   var svgCircles = d3.select("svg.circles");
-  var svgMap = d3.select("svg.map");
+  var svgMap = d3.select("svg.map").call(zoom);
 
   var circles = svgCircles.selectAll('circle')
                           .data(attributesEnter)
