@@ -118,17 +118,14 @@ In the "empty-example" folder, you will find a "sketch.js" and an "index.html" f
 Open the index.html file in your browser by double clicking on it in your file manager or type: file:///the/file/path/to/your/html in the address bar to view your sketch.
 
 ##Your First Sketch
-In your editor in sketch.js, type the following:
+In your editor in sketch.js, notice that there are two functions -- setup and draw.
 
-```
-function setup() {
+Setup is called once at the beginning of the program while draw is called constantly in a loop.
 
-}
+In the draw function create a circle:
 
-function draw() {
-  ellipse(50, 50, 80, 80);
-}
-```
+'''ellipse(50, 50, 80, 80);'''
+
 
 
 This line of code means “draw an ellipse, with the center 50 pixels over from the left and 50 pixels down from the top, with a width and height of 80 pixels.”
